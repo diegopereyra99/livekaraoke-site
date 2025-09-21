@@ -51,8 +51,12 @@
 
     function scrollToIndex(idx, smooth){
       const slides = getSlides();
-      if(!slides[idx]) return;
-      slides[idx].scrollIntoView({ inline: 'start', block: 'nearest', behavior: smooth ? 'smooth' : 'auto' });
+      const slide = slides[idx];
+      if(!slide) return;
+      // Scroll the track horizontally instead of using scrollIntoView on the slide,
+      // to avoid moving the whole page when the carousel auto-advances.
+      const x = slide.offsetLeft;
+      track.scrollTo({ left: x, behavior: smooth ? 'smooth' : 'auto' });
     }
 
     function next(){
@@ -103,4 +107,3 @@
     start();
   }
 })();
-
