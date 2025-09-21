@@ -9,7 +9,7 @@ header.hero{
 .hero::before{
   content:""; position:absolute; inset:0;
   /* Default: mobile/tablet */
-  background: url('../hero-800.webp') center/cover no-repeat;
+  background: url('../photos/hero/hero-800.webp') center/cover no-repeat;
   background-attachment: fixed;
   /* Keep the image as-is (slight boost + optional blur). Adjust as needed. */
   filter: brightness(0.6) saturate(1.05) blur(8px);
@@ -18,10 +18,10 @@ header.hero{
 
 /* Swap hero image for larger viewports */
 @media (min-width: 900px){
-  .hero::before{ background-image: url('../hero-1280.webp'); }
+  .hero::before{ background-image: url('../photos/hero/hero-1280.webp'); }
 }
 @media (min-width: 1400px){
-  .hero::before{ background-image: url('../hero-1920.webp'); }
+  .hero::before{ background-image: url('../photos/hero/hero-1920.webp'); }
 }
 .hero::after{ content:""; position:absolute; inset:0; background: none; pointer-events: none; }
 
@@ -43,6 +43,40 @@ header.hero{
 
 /* Steps sizing refinements for this page */
 .step{ min-height: 220px; }
+
+/* What section: responsive two-column layout */
+.what-grid{ display:grid; gap: clamp(16px, 2vw, 24px); align-items: start; }
+@media (min-width: 900px){ .what-grid{ grid-template-columns: 1fr 1.4fr; } }
+
+/* Improve readability for What section */
+#what .what-left .stack{ gap: clamp(16px, 2.2vw, 22px); }
+#what .what-left{ align-self: center; padding-inline: clamp(12px, 3vw, 36px); }
+#what .what-left p{
+  font-size: clamp(19px, 1.2vw, 22px);
+  line-height: 1.8;
+  letter-spacing: .1px;
+  text-align: justify;
+  text-justify: inter-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+@media (max-width: 900px){
+  #what .what-left p{ text-align: center; }
+}
+
+/* Carousel */
+.carousel{ display:grid; gap: 10px; }
+.carousel .track{
+  display:grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 12px;
+  overflow-x:auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px; scrollbar-width: none;
+}
+.carousel .track::-webkit-scrollbar{ display:none; }
+.slide{ margin:0; scroll-snap-align: start; position:relative; border-radius: 14px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:#0e0e16; }
+.slide img{ width:100%; height: clamp(240px, 42vw, 420px); object-fit:cover; display:block; }
+.carousel .dots{ display:flex; gap:8px; justify-content:center; }
+.carousel .dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.4); border:0; padding:0; cursor:pointer; }
+.carousel .dot.active{ background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
 
 /* Gallery */
 .gallery{ display:grid; gap:14px; grid-template-columns: repeat(3, 1fr); }

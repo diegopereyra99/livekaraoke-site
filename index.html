@@ -6,6 +6,9 @@
   <title>Live Karaoke Paris — Sing with a Live Band</title>
   <meta name="description" content="Live Karaoke Paris: sing your favorite songs with a live band in a fun, professional, nightlife atmosphere. Join the stage!" />
   <meta name="theme-color" content="#0b0b12" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700;800&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/theme.css" />
   <link rel="stylesheet" href="assets/css/landing.css" />
 </head>
@@ -33,10 +36,29 @@
       <div class="container">
         <p class="eyebrow">What it is</p>
         <h2 id="what-title" class="h2 neon-text">An interactive live‑band karaoke night</h2>
-        <div class="card stack reveal">
-          <p>
-            Live Karaoke Paris is a high‑energy night out where the audience becomes the show. A professional live band backs you up while you perform the hits you love. The vibe is friendly, supportive, and a little wild—in the best way.
-          </p>
+
+        <div class="what-grid">
+          <div class="what-left reveal">
+            <div class="stack">
+              <p>
+                From student parties to Paris bars and private events, our format brings the thrill of singing with a live band. Every show is full of energy, unforgettable vibes — and a photographer ready to capture it all!
+              </p>
+            </div>
+          </div>
+
+          <div class="what-right reveal">
+            <div class="carousel" id="what-carousel" aria-label="What it is photos">
+              <div class="track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Photo carousel">
+                <figure class="slide"><img src="assets/photos/what/photo01.jpg" alt="Live Karaoke Paris crowd and singer" loading="lazy"></figure>
+                <figure class="slide"><img src="assets/photos/what/photo02.jpg" alt="Band on stage with neon lights" loading="lazy"></figure>
+                <figure class="slide"><img src="assets/photos/what/photo03.jpg" alt="Singer performing" loading="lazy"></figure>
+                <figure class="slide"><img src="assets/photos/what/photo04.jpg" alt="Friends singing together" loading="lazy"></figure>
+                <figure class="slide"><img src="assets/photos/what/photo05.jpg" alt="Hands up in the crowd" loading="lazy"></figure>
+                <figure class="slide"><img src="assets/photos/what/photo06.jpg" alt="Close up on the mic and lights" loading="lazy"></figure>
+              </div>
+              <div class="dots" role="tablist" aria-label="Choose slide"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -48,17 +70,17 @@
         <h2 id="how-title" class="h2">It’s simple to jump on stage</h2>
         <div class="steps">
   <div class="step reveal delay-1" data-bg="choose">
-    <img class="step-bg" src="assets/step-choose.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photo07.jpg';" />
+    <img class="step-bg" src="assets/step-choose.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photos/gallery/photo07.jpg';" />
     <b>1) Choose a song</b>
     <p>From Beatles & ABBA to Queen, Ed Sheeran, Bruno Mars, Lady Gaga, Billy Joel & more. <em>We love new requests—tell us your song!</em></p>
   </div>
   <div class="step reveal delay-2" data-bg="band">
-    <img class="step-bg" src="assets/step-band.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photo03.jpg';" />
+    <img class="step-bg" src="assets/step-band.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photos/gallery/photo03.jpg';" />
     <b>2) Join the band</b>
     <p>We handle lyrics, cues, and key. You take the mic; we bring the groove.</p>
   </div>
   <div class="step reveal delay-3" data-bg="perform">
-    <img class="step-bg" src="assets/step-perform.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photo01.jpg';" />
+    <img class="step-bg" src="assets/step-perform.jpg" alt="" aria-hidden="true" onerror="this.onerror=null; this.src='assets/photos/gallery/photo01.jpg';" />
     <b>3) Perform with the crowd</b>
     <p>Lights on, friends cheering, a proper stage moment you’ll remember.</p>
   </div>
@@ -73,39 +95,39 @@
         <h2 id="photos-title" class="h2">The vibe in pictures</h2>
         <div class="gallery" role="list">
   <figure class="reveal" role="listitem">
-    <img src="assets/photo01.jpg" alt="Singer on stage with live band" loading="lazy" />
+    <img src="assets/photos/gallery/photo01.jpg" alt="Singer on stage with live band" loading="lazy" />
     <figcaption>Spotlight moments</figcaption>
   </figure>
   <figure class="reveal delay-1" role="listitem">
-    <img src="assets/photo02.jpg" alt="Crowd cheering with neon lights" loading="lazy" />
+    <img src="assets/photos/gallery/photo02.jpg" alt="Crowd cheering with neon lights" loading="lazy" />
     <figcaption>Crowd energy</figcaption>
   </figure>
   <figure class="reveal delay-2" role="listitem">
-    <img src="assets/photo03.jpg" alt="Guitarist and drummer on stage" loading="lazy" />
+    <img src="assets/photos/gallery/photo03.jpg" alt="Guitarist and drummer on stage" loading="lazy" />
     <figcaption>Live band</figcaption>
   </figure>
   <figure class="reveal" role="listitem">
-    <img src="assets/photo04.jpg" alt="Friends singing together" loading="lazy" />
+    <img src="assets/photos/gallery/photo04.jpg" alt="Friends singing together" loading="lazy" />
     <figcaption>Sing together</figcaption>
   </figure>
   <figure class="reveal delay-1" role="listitem">
-    <img src="assets/photo05.jpg" alt="Singer smiling with microphone" loading="lazy" />
+    <img src="assets/photos/gallery/photo05.jpg" alt="Singer smiling with microphone" loading="lazy" />
     <figcaption>All smiles</figcaption>
   </figure>
   <figure class="reveal delay-2" role="listitem">
-    <img src="assets/photo06.jpg" alt="Hands up in the crowd" loading="lazy" />
+    <img src="assets/photos/gallery/photo06.jpg" alt="Hands up in the crowd" loading="lazy" />
     <figcaption>Hands up</figcaption>
   </figure>
   <figure class="reveal" role="listitem">
-    <img src="assets/photo07.jpg" alt="Neon lights over the stage" loading="lazy" />
+    <img src="assets/photos/gallery/photo07.jpg" alt="Neon lights over the stage" loading="lazy" />
     <figcaption>Neon nights</figcaption>
   </figure>
   <figure class="reveal delay-1" role="listitem">
-    <img src="assets/photo08.jpg" alt="Singer and bassist sharing the groove" loading="lazy" />
+    <img src="assets/photos/gallery/photo08.jpg" alt="Singer and bassist sharing the groove" loading="lazy" />
     <figcaption>Groove locked</figcaption>
   </figure>
   <figure class="reveal delay-2" role="listitem">
-    <img src="assets/photo09.jpg" alt="Close-up of microphone with lights" loading="lazy" />
+    <img src="assets/photos/gallery/photo09.jpg" alt="Close-up of microphone with lights" loading="lazy" />
     <figcaption>Mic check</figcaption>
   </figure>
 </div>
@@ -134,6 +156,7 @@
     </div>
   </footer>
 
+  <script defer src="assets/js/what-carousel.js"></script>
   <!-- Tiny JS: intersection observer for reveals + current year -->
   <script>
     // Year
