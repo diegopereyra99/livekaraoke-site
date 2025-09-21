@@ -5,10 +5,17 @@
   --bg-2: #12121b;
   --text: #f2f5f8;
   --muted: #b8c0cc;
-  --pink: #ff3d6e;
-  --purple: #7a2cff;
-  --accent-start: var(--pink);
-  --accent-end: var(--purple);
+  /* Accent palette aligned with the logo */
+  /* Logo-aligned palette (soft periwinkle → lavender → pink-lavender) */
+  --purple:   #9aa5ff;      /* periwinkle / bluish lavender */
+  --lavender: #c7b9ff;      /* light lavender (body of the logo) */
+  --pink:     #e6c6ff;      /* pink-leaning lavender */
+  --accent-start: var(--purple);
+  --accent-mid:   var(--lavender);
+  --accent-end:   var(--pink);
+  /* Neon glow fallback colors */
+  --glow-1: rgba(199,185,255,.45);  /* lavender glow */
+  --glow-2: rgba(154,165,255,.35);  /* periwinkle glow */
   --focus: #ff8bd1;
   --maxw: 1280px;
   --radius: 16px;
@@ -37,10 +44,10 @@ a{ color:inherit; text-decoration:none; }
 .section{ padding: clamp(48px, 7vw, 96px) 0; }
 
 /* Neon gradient utilities */
-.neon-text{
-  background: linear-gradient(90deg, #ff3d6e 0%, #c13cff 45%, #7a2cff 100%);
+.neon-text, .h2{
+  background: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-mid) 45%, var(--accent-end) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: 0 0 12px rgba(255,61,110,.35), 0 0 18px rgba(122,44,255,.28);
+  text-shadow: 0 0 10px rgba(154,165,255,.28), 0 0 14px rgba(199,185,255,.28), 0 0 18px rgba(230,198,255,.24);
 }
 
 .btn{
@@ -50,10 +57,11 @@ a{ color:inherit; text-decoration:none; }
   padding: var(--pady) var(--padx);
   font-weight: 700; letter-spacing: .3px; border: 0; border-radius: 999px; cursor:pointer;
   background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-  color:#fff; box-shadow: 0 10px 30px rgba(122,44,255,.28), 0 6px 18px rgba(255,61,110,.25);
+  color: #0b0b12; /* dark text for light gradient */
+  box-shadow: 0 10px 30px rgba(154,165,255,.28), 0 6px 18px rgba(199,185,255,.25);
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease;
 }
-.btn:hover{ transform: translateY(-2px); filter: brightness(1.05); background: linear-gradient(135deg, var(--accent-end), var(--accent-start)); box-shadow: 0 16px 40px rgba(122,44,255,.36), 0 8px 24px rgba(255,61,110,.32); }
+.btn:hover{ transform: translateY(-2px); filter: brightness(1.03); background: linear-gradient(135deg, var(--accent-end), var(--accent-start)); box-shadow: 0 16px 40px rgba(154,165,255,.36), 0 8px 24px rgba(199,185,255,.32); }
 .btn:active{ transform: translateY(0); }
 
 /* Typography */

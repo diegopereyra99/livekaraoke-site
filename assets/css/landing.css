@@ -39,10 +39,15 @@ header.hero{
 .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top: .6rem; }
 
 /* Logo sizing in hero */
-.logo-img{ display:block; width: clamp(260px, 55vw, 720px); height:auto; margin-inline:auto; }
+.logo-img{ display:block; width: clamp(260px, 55vw, 720px); height:auto; margin-inline:auto; 
+  /* Fallback glow if SVG filters are unsupported */
+  filter: drop-shadow(0 0 12px var(--glow-1)) drop-shadow(0 0 22px var(--glow-2));
+}
 
 /* Steps sizing refinements for this page */
 .step{ min-height: 220px; }
+.step .step-cta{ position:relative; z-index:1; margin-top: 8px; }
+.step .step-icon{ position:relative; z-index:1; font-size: 28px; margin-top: 6px; line-height: 1; }
 
 /* What section: responsive two-column layout */
 .what-grid{ display:grid; gap: clamp(16px, 2vw, 24px); align-items: start; }
