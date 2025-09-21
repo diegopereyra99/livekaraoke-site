@@ -1,0 +1,53 @@
+/* Header / Hero */
+header.hero{
+  position: relative; min-height: clamp(75vh, 80vh, 92vh); display:grid; place-items:center; isolation:isolate; overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background: url('../assets/hero.jpg') center/cover no-repeat;
+  background-attachment: fixed;
+  filter: brightness(.6) saturate(1.1) blur(3px);
+  transform: scale(1.03);
+}
+.hero::after{
+  content:""; position:absolute; inset:0; background: radial-gradient(1000px 500px at 50% -10%, rgba(122,44,255,.18), transparent 60%),
+                                  radial-gradient(900px 600px at 10% 110%, rgba(255,61,110,.18), transparent 60%),
+                                  linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
+  mix-blend-mode: screen; pointer-events: none;
+}
+
+.hero-inner{ position:relative; z-index:1; width:100%; }
+.hero-card{
+  max-width: 900px; margin-inline:auto; padding: clamp(20px, 3vw, 28px);
+  background: color-mix(in oklab, var(--bg-2), black 10%);
+  backdrop-filter: blur(6px) saturate(120%);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-cta{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top: .6rem; }
+
+/* Steps sizing refinements for this page */
+.step{ min-height: 220px; }
+
+/* Gallery */
+.gallery{ display:grid; gap:14px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px){ .gallery{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .gallery{ grid-template-columns: 1fr; } }
+.gallery figure{ position:relative; margin:0; overflow:hidden; border-radius: 14px; border:1px solid rgba(255,255,255,.08); background: #0e0e16; }
+.gallery img{ width:100%; height: 280px; object-fit:cover; transition: transform .4s ease, filter .4s ease; will-change: transform; }
+.gallery figure:hover img{ transform: scale(1.06); filter: saturate(1.15) contrast(1.05); }
+.gallery figcaption{ position:absolute; inset:auto 8px 8px 8px; padding:4px 8px; font-size:.8rem; color:#e9eef5; background: rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.08); border-radius: 999px; }
+
+/* Mobile & touch tweaks for this page */
+@media (max-width: 900px){
+  .hero::before{ background-attachment: scroll; }
+}
+@media (max-width: 560px){
+  .hero-card{ padding: 16px; }
+  .subtitle{ font-size: 16px; }
+  .hero-cta .btn{ width: 100%; }
+  .gallery img{ height: 220px; }
+  .step{ min-height: 200px; }
+}
