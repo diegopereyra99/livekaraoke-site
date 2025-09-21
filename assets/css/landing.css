@@ -1,32 +1,45 @@
 /* Header / Hero */
 header.hero{
-  position: relative; min-height: clamp(75vh, 80vh, 92vh); display:grid; place-items:center; isolation:isolate; overflow:hidden;
+  position: relative;
+  /* Full viewport height; svh handles mobile browser UI chrome */
+  min-height: 100vh;
+  min-height: 100svh;
+  display:grid; place-items:center; isolation:isolate; overflow:hidden;
 }
 .hero::before{
   content:""; position:absolute; inset:0;
-  background: url('../assets/hero.jpg') center/cover no-repeat;
+  /* Default: mobile/tablet */
+  background: url('../hero-800.webp') center/cover no-repeat;
   background-attachment: fixed;
-  filter: brightness(.6) saturate(1.1) blur(3px);
+  /* Keep the image as-is (slight boost + optional blur). Adjust as needed. */
+  filter: brightness(0.6) saturate(1.05) blur(8px);
   transform: scale(1.03);
 }
-.hero::after{
-  content:""; position:absolute; inset:0; background: radial-gradient(1000px 500px at 50% -10%, rgba(122,44,255,.18), transparent 60%),
-                                  radial-gradient(900px 600px at 10% 110%, rgba(255,61,110,.18), transparent 60%),
-                                  linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
-  mix-blend-mode: screen; pointer-events: none;
+
+/* Swap hero image for larger viewports */
+@media (min-width: 900px){
+  .hero::before{ background-image: url('../hero-1280.webp'); }
 }
+@media (min-width: 1400px){
+  .hero::before{ background-image: url('../hero-1920.webp'); }
+}
+.hero::after{ content:""; position:absolute; inset:0; background: none; pointer-events: none; }
 
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-card{
   max-width: 900px; margin-inline:auto; padding: clamp(20px, 3vw, 28px);
-  background: color-mix(in oklab, var(--bg-2), black 10%);
-  backdrop-filter: blur(6px) saturate(120%);
-  border: 1px solid rgba(255,255,255,.06);
+  /* Remove the dark glass panel for a full-photo hero */
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
 }
 
 .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top: .6rem; }
+
+/* Logo sizing in hero */
+.logo-img{ display:block; width: clamp(260px, 55vw, 720px); height:auto; margin-inline:auto; }
 
 /* Steps sizing refinements for this page */
 .step{ min-height: 220px; }
