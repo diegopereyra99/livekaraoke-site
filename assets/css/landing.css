@@ -55,6 +55,12 @@ header.hero{
 #what .what-hero{ position:relative; /* removed isolation to keep same stacking context as #what */ min-height: clamp(360px, 58vh, 640px); border-radius: 16px; overflow:hidden; display:grid; }
 #what .what-hero > *{ grid-area: 1 / 1; }
 #what .what-hero .carousel{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:0; }
+#what .what-hero .carousel::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.38); /* darken photos for readability */
+  z-index: 1; pointer-events: none;
+}
 #what .what-hero .carousel .track{
   height:100%;
   grid-auto-columns: 100%;
