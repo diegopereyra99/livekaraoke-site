@@ -50,9 +50,11 @@ header.hero{
 .step .step-icon{ position:relative; z-index:1; font-size: 28px; margin-top: 6px; line-height: 1; }
 
 /* What section: single-column hero with background carousel */
-#what .what-hero{ position:relative; isolation:isolate; min-height: clamp(360px, 58vh, 640px); border-radius: 16px; overflow:hidden; display:grid; }
+/* Unify stacking context at #what so backdrop-filter can sample carousel pixels */
+#what{ isolation:isolate; }
+#what .what-hero{ position:relative; /* removed isolation to keep same stacking context as #what */ min-height: clamp(360px, 58vh, 640px); border-radius: 16px; overflow:hidden; display:grid; }
 #what .what-hero > *{ grid-area: 1 / 1; }
-#what .what-hero .carousel{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:1; }
+#what .what-hero .carousel{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:0; }
 #what .what-hero .carousel .track{
   height:100%;
   grid-auto-columns: 100%;
@@ -64,41 +66,58 @@ header.hero{
 #what .what-hero .slide img{ width:100%; height:100%; object-fit: cover; filter: saturate(1.05) contrast(1.02); }
 
 /* Overlay card for text */
-#what .what-overlay{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:2; display:grid; place-items:center; height:100%; padding: clamp(16px, 3vw, 32px); }
+#what .what-overlay{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:10; display:grid; place-items:center; height:100%; padding: clamp(16px, 3vw, 32px); }
+#what .what-overlay.reveal{ opacity:1; transform:none !important; }
+#what .what-overlay.reveal.in{ animation:none !important; }
 #what .what-overlay .stack{ gap: clamp(16px, 2.2vw, 22px); }
 #what .what-overlay p{
   max-width: 900px;
   margin-inline: auto;
   padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.4vw, 24px);
-  /* Darker, less transparent background with subtle blur behind */
-  background: rgba(0,0,0,.64);
-  -webkit-backdrop-filter: blur(6px) saturate(1.05);
-  backdrop-filter: blur(6px) saturate(1.05);
+  /* Card background and clipping; blur is applied on an internal layer */
+  position: relative;
+  z-index: 0; /* establish stacking context; keep pseudo-element behind content */
+  background: transparent;
+  overflow: hidden;
   border: 1px solid rgba(255,255,255,.10);
   border-radius: 14px;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   font-size: clamp(18px, 1.1vw, 21px);
   line-height: 1.8;
   color: #eef3f9;
+  text-align: center;
+}
+/* Dedicated blur+tint layer for WebKit reliability */
+#what .what-overlay p::before{
+  content: "";
+  position: absolute; inset: 0;
+  z-index: -1; /* sit below text, above carousel */
+  background: rgba(0,0,0,.58);
+  -webkit-backdrop-filter: blur(10px) saturate(1.06);
+  backdrop-filter: blur(10px) saturate(1.06);
+  border-radius: inherit;
+  pointer-events: none;
 }
 /* Desktop: make overlay box and text larger */
 @media (min-width: 900px){
   #what .what-hero{ min-height: clamp(520px, 66vh, 820px); }
   #what .what-overlay .stack{ gap: 24px; }
   #what .what-overlay p{
-    max-width: 900px; /* keep width the same */
-    /* taller but not wider: increase vertical padding only */
+    max-width: 900px; /* restore desktop width */
+    /* restore original vertical padding */
     padding: clamp(28px, 3.2vw, 44px) clamp(14px, 2.4vw, 24px);
     font-size: clamp(20px, 1.4vw, 28px);
     line-height: 1.9;
-    /* Stronger glass blur on desktop */
+    /* Stronger glass effect handled by the pseudo-layer */
+  }
+  #what .what-overlay p::before{
     background: rgba(0,0,0,.5);
-    -webkit-backdrop-filter: blur(14px) saturate(1.08);
-    backdrop-filter: blur(14px) saturate(1.08);
-    will-change: backdrop-filter;
+    -webkit-backdrop-filter: blur(16px) saturate(1.08);
+    backdrop-filter: blur(16px) saturate(1.08);
   }
 }
-@media (max-width: 900px){ #what .what-overlay p{ text-align:center; } }
+/* Centered text on mobile too */
+@media (max-width: 900px){ #what .what-overlay p{ text-align: center; } }
 
 /* Carousel */
 .carousel{ display:grid; gap: 10px; }
