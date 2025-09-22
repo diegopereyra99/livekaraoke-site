@@ -45,29 +45,60 @@ header.hero{
 }
 
 /* Steps sizing refinements for this page */
-.step{ min-height: 220px; }
+#how .step{ min-height: 300px; }
 .step .step-cta{ position:relative; z-index:1; margin-top: 8px; }
 .step .step-icon{ position:relative; z-index:1; font-size: 28px; margin-top: 6px; line-height: 1; }
 
-/* What section: responsive two-column layout */
-.what-grid{ display:grid; gap: clamp(16px, 2vw, 24px); align-items: start; }
-@media (min-width: 900px){ .what-grid{ grid-template-columns: 1fr 1.4fr; } }
+/* What section: single-column hero with background carousel */
+#what .what-hero{ position:relative; isolation:isolate; min-height: clamp(360px, 58vh, 640px); border-radius: 16px; overflow:hidden; display:grid; }
+#what .what-hero > *{ grid-area: 1 / 1; }
+#what .what-hero .carousel{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:1; }
+#what .what-hero .carousel .track{
+  height:100%;
+  grid-auto-columns: 100%;
+  padding-bottom: 0; /* remove bottom gap */
+  overflow-x: hidden; /* hide manual scroll */
+  pointer-events: none; /* disable manual interaction */
+}
+#what .what-hero .slide{ border:0; border-radius:0; background: transparent; }
+#what .what-hero .slide img{ width:100%; height:100%; object-fit: cover; filter: saturate(1.05) contrast(1.02); }
 
-/* Improve readability for What section */
-#what .what-left .stack{ gap: clamp(16px, 2.2vw, 22px); }
-#what .what-left{ align-self: center; padding-inline: clamp(12px, 3vw, 36px); }
-#what .what-left p{
-  font-size: clamp(19px, 1.2vw, 22px);
+/* Overlay card for text */
+#what .what-overlay{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:2; display:grid; place-items:center; height:100%; padding: clamp(16px, 3vw, 32px); }
+#what .what-overlay .stack{ gap: clamp(16px, 2.2vw, 22px); }
+#what .what-overlay p{
+  max-width: 900px;
+  margin-inline: auto;
+  padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.4vw, 24px);
+  /* Darker, less transparent background with subtle blur behind */
+  background: rgba(0,0,0,.64);
+  -webkit-backdrop-filter: blur(6px) saturate(1.05);
+  backdrop-filter: blur(6px) saturate(1.05);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  font-size: clamp(18px, 1.1vw, 21px);
   line-height: 1.8;
-  letter-spacing: .1px;
-  text-align: justify;
-  text-justify: inter-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  color: #eef3f9;
 }
-@media (max-width: 900px){
-  #what .what-left p{ text-align: center; }
+/* Desktop: make overlay box and text larger */
+@media (min-width: 900px){
+  #what .what-hero{ min-height: clamp(520px, 66vh, 820px); }
+  #what .what-overlay .stack{ gap: 24px; }
+  #what .what-overlay p{
+    max-width: 900px; /* keep width the same */
+    /* taller but not wider: increase vertical padding only */
+    padding: clamp(28px, 3.2vw, 44px) clamp(14px, 2.4vw, 24px);
+    font-size: clamp(20px, 1.4vw, 28px);
+    line-height: 1.9;
+    /* Stronger glass blur on desktop */
+    background: rgba(0,0,0,.5);
+    -webkit-backdrop-filter: blur(14px) saturate(1.08);
+    backdrop-filter: blur(14px) saturate(1.08);
+    will-change: backdrop-filter;
+  }
 }
+@media (max-width: 900px){ #what .what-overlay p{ text-align:center; } }
 
 /* Carousel */
 .carousel{ display:grid; gap: 10px; }
@@ -83,8 +114,23 @@ header.hero{
 .carousel .dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.4); border:0; padding:0; cursor:pointer; }
 .carousel .dot.active{ background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
 
+/* Hide dots for What section */
+#what .carousel .dots{ display:none; }
+
 /* Gallery */
 .gallery{ display:grid; gap:14px; grid-template-columns: repeat(3, 1fr); }
+/* Desktop: increase How It Works step height */
+@media (min-width: 900px){
+  #how .step{ min-height: 400px; }
+}
+
+/* Larger text inside How steps */
+#how .step b{ font-size: clamp(1.2rem, 2.2vw, 1.5rem); }
+#how .step p{ font-size: clamp(1rem, 1.6vw, 1.15rem); line-height: 1.75; }
+
+/* Contact section tweaks */
+#contact .contact-lead{ max-width: 960px; margin: 8px 0 0; font-size: clamp(20px, 2.6vw, 24px); }
+#contact .contact-cta{ margin-top: clamp(16px, 2.5vw, 28px); }
 @media (max-width: 900px){ .gallery{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .gallery{ grid-template-columns: 1fr; } }
 .gallery figure{ position:relative; margin:0; overflow:hidden; border-radius: 14px; border:1px solid rgba(255,255,255,.08); background: #0e0e16; }

@@ -11,7 +11,7 @@
 
     const track = root.querySelector('.track');
     const dotsWrap = root.querySelector('.dots');
-    if(!track || !dotsWrap) return;
+    if(!track) return;
 
     const getSlides = () => Array.from(track.querySelectorAll('.slide'));
 
@@ -20,6 +20,7 @@
 
     // Build dots based on slides
     function buildDots(){
+      if(!dotsWrap) return;
       dotsWrap.innerHTML = '';
       getSlides().forEach((slide, i) => {
         const dot = document.createElement('button');
@@ -34,7 +35,7 @@
     }
     buildDots();
 
-    const dots = () => Array.from(dotsWrap.querySelectorAll('.dot'));
+    const dots = () => dotsWrap ? Array.from(dotsWrap.querySelectorAll('.dot')) : [];
     let current = 0;
     let autoplayTimer = null;
     let hover = false, focus = false, pointerDown = false;
@@ -42,11 +43,13 @@
     // Active state sync
     function setActive(idx){
       current = idx;
-      dots().forEach((d, i) => {
-        const on = i === idx;
-        d.classList.toggle('active', on);
-        d.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
+      if(dotsWrap){
+        dots().forEach((d, i) => {
+          const on = i === idx;
+          d.classList.toggle('active', on);
+          d.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
     }
 
     function scrollToIndex(idx, smooth){
