@@ -77,7 +77,7 @@ header.hero{
 #what .what-overlay.reveal.in{ animation:none !important; }
 #what .what-overlay .stack{ gap: clamp(16px, 2.2vw, 22px); }
 #what .what-overlay p{
-  max-width: 900px;
+  max-width: 1024px;
   margin-inline: auto;
   padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.4vw, 24px);
   /* Card background and clipping; blur is applied on an internal layer */
@@ -109,7 +109,7 @@ header.hero{
   #what .what-hero{ min-height: clamp(520px, 66vh, 820px); }
   #what .what-overlay .stack{ gap: 24px; }
   #what .what-overlay p{
-    max-width: 900px; /* restore desktop width */
+    max-width: 1024px; /* slightly wider desktop width */
     /* restore original vertical padding */
     padding: clamp(28px, 3.2vw, 44px) clamp(14px, 2.4vw, 24px);
     font-size: clamp(20px, 1.4vw, 28px);
