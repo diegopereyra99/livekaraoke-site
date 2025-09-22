@@ -11,6 +11,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700;800&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/theme.css" />
   <link rel="stylesheet" href="assets/css/landing.css" />
+  
+  <script>
+    // Override favicon color at runtime using the base SVG
+    (function(){
+      const ICON_SRC = 'assets/icon.svg';
+      const COLOR = '#7f8cff'; // darker accent
+      try{
+        fetch(ICON_SRC).then(r=>r.text()).then(svg=>{
+          // Replace any fill="..." occurrences with the target color
+          const colored = svg.replace(/fill=\"#[0-9a-fA-F]{3,6}\"/g, `fill=\"${COLOR}\"`);
+          const dataUrl = 'data:image/svg+xml,' + encodeURIComponent(colored);
+          let link = document.querySelector('link[rel="icon"][data-dynamic]');
+          if(!link){
+            link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/svg+xml';
+            link.setAttribute('data-dynamic','1');
+            document.head.appendChild(link);
+          }
+          link.href = dataUrl;
+        }).catch(()=>{});
+      }catch(e){ /* no-op */ }
+    })();
+  </script>
+  <!-- Site icon / thumbnail -->
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="mask-icon" href="assets/icon.svg" color="#7f8cff" />
 </head>
 
 <body>
