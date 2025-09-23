@@ -49,7 +49,7 @@ header.hero{
 #how .step{ min-height: 320px; }
 #how .step{ display:flex; flex-direction: column; }
 #how .step .step-bg{ opacity: .45; filter: saturate(1.12) contrast(1.04) brightness(1.05) blur(1.5px); }
-#how .step[data-bg="band"] .step-bg{ object-position: 20% center; }
+#how .step[data-bg="band"] .step-bg{ object-position: 90% center; }
 #how .step::after{ background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.32)); }
 .step .step-cta{ position:relative; z-index:1; margin-top: 8px; }
 .step .step-icon{ position:relative; z-index:1; font-size: 28px; margin-top: 6px; line-height: 1; }
