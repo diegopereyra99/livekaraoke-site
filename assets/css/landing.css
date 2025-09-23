@@ -45,9 +45,30 @@ header.hero{
 }
 
 /* Steps sizing refinements for this page */
-#how .step{ min-height: 300px; }
+/* Moderately taller boxes and brighter photos in How section */
+#how .step{ min-height: 320px; }
+#how .step{ display:flex; flex-direction: column; }
+#how .step .step-bg{ opacity: .45; filter: saturate(1.12) contrast(1.04) brightness(1.05) blur(1.5px); }
+#how .step[data-bg="band"] .step-bg{ object-position: 20% center; }
+#how .step::after{ background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.32)); }
 .step .step-cta{ position:relative; z-index:1; margin-top: 8px; }
 .step .step-icon{ position:relative; z-index:1; font-size: 28px; margin-top: 6px; line-height: 1; }
+
+/* Place CTAs at the bottom for How steps and add subtle button style */
+#how .step .step-cta{ margin-top: auto; display:flex; }
+#how .step .step-cta .btn-subtle{ margin-top: 10px; }
+
+.btn-subtle{
+  --bg: rgba(255,255,255,.06);
+  --border: rgba(199,185,255,.28);
+  --text: var(--lavender);
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 10px 16px; border-radius: 999px; font-weight: 700; letter-spacing:.2px;
+  background: var(--bg); color: var(--text); border: 1px solid var(--border);
+  box-shadow: none; transition: background .18s ease, border-color .18s ease, transform .12s ease;
+}
+.btn-subtle:hover{ background: rgba(255,255,255,.09); border-color: rgba(199,185,255,.4); transform: translateY(-1px); }
+.btn-subtle:active{ transform: translateY(0); }
 
 /* What section: single-column hero with background carousel */
 /* Unify stacking context at #what so backdrop-filter can sample carousel pixels */
@@ -146,12 +167,14 @@ header.hero{
 .gallery{ display:grid; gap:14px; grid-template-columns: repeat(3, 1fr); }
 /* Desktop: increase How It Works step height */
 @media (min-width: 900px){
-  #how .step{ min-height: 400px; }
+  #how .step{ min-height: 420px; }
 }
 
 /* Larger text inside How steps */
-#how .step b{ font-size: clamp(1.2rem, 2.2vw, 1.5rem); }
-#how .step p{ font-size: clamp(1rem, 1.6vw, 1.15rem); line-height: 1.75; }
+#how .step b{ font-size: clamp(1.35rem, 2.6vw, 1.75rem); }
+#how .step p{ font-size: clamp(1.05rem, 1.85vw, 1.25rem); line-height: 1.8; }
+#how .step p.step-lines{ display:grid; gap: 2px; margin: 6px 0 0; }
+#how .step p.step-lines span{ display:block; }
 
 /* Contact section tweaks */
 #contact .contact-lead{ max-width: 960px; margin: 8px 0 0; font-size: clamp(20px, 2.6vw, 24px); }
@@ -169,8 +192,12 @@ header.hero{
 }
 @media (max-width: 560px){
   .hero-card{ padding: 16px; }
-  .subtitle{ font-size: 16px; }
-  .hero-cta .btn{ width: 100%; }
+  /* Bigger logo and subtitle on mobile */
+  .logo-img{ width: clamp(300px, 84vw, 520px); }
+  .subtitle{ font-size: 20px; }
+  /* Smaller hero buttons on mobile */
+  .hero-cta .btn{ width: 100%; --padx: 14px; --pady: 8px; font-size: .9rem; }
   .gallery img{ height: 220px; }
   .step{ min-height: 200px; }
+  #how .step{ min-height: 230px; }
 }
