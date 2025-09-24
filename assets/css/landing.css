@@ -82,6 +82,11 @@ header.hero{
   background: rgba(0,0,0,.38); /* darken photos for readability */
   z-index: 1; pointer-events: none;
 }
+/* When using a background video instead of the carousel, darken via the container */
+#what .what-hero::after{
+  content:""; position:absolute; inset:0; z-index: 1; pointer-events:none;
+  background: rgba(0,0,0,.2); /* lighten overlay to brighten video */
+}
 #what .what-hero .carousel .track{
   height:100%;
   grid-auto-columns: 100%;
@@ -90,9 +95,24 @@ header.hero{
   pointer-events: none; /* disable manual interaction */
 }
 #what .what-hero .slide{ border:0; border-radius:0; background: transparent; }
-#what .what-hero .slide img{ width:100%; height:100%; object-fit: cover; filter: saturate(1.05) contrast(1.02); }
+#what .what-hero .slide img{
+  width:100%; height:100%; object-fit: cover;
+  /* Blur photos behind the text for readability */
+  filter: saturate(1.05) contrast(1.02) blur(5px);
+  transform: scale(1.03); /* compensate blur edge */
+  will-change: filter, transform;
+}
 
-/* Overlay card for text */
+/* Background video fills and sits under overlay */
+#what .what-hero .bg-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+  /* Brighter video with subtle blur to highlight text shadow */
+  filter: brightness(1.02) saturate(1.1) contrast(1.05) blur(5px);
+  transform: scale(1.03);
+  will-change: filter, transform;
+}
+
+/* Overlay text (no box) */
 #what .what-overlay{ position:absolute; top:0; right:0; bottom:0; left:0; z-index:10; display:grid; place-items:center; height:100%; padding: clamp(16px, 3vw, 32px); }
 #what .what-overlay.reveal{ opacity:1; transform:none !important; }
 #what .what-overlay.reveal.in{ animation:none !important; }
@@ -100,48 +120,40 @@ header.hero{
 #what .what-overlay p{
   max-width: 1024px;
   margin-inline: auto;
-  padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.4vw, 24px);
-  /* Card background and clipping; blur is applied on an internal layer */
+  padding: 0; /* remove box-like padding */
   position: relative;
-  z-index: 0; /* establish stacking context; keep pseudo-element behind content */
+  z-index: 0;
   background: transparent;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   font-size: clamp(18px, 1.1vw, 21px);
   line-height: 1.8;
   color: #eef3f9;
   text-align: center;
+  /* Stronger legibility over video */
+  text-shadow:
+  0 2px 40px rgba(0,0,0,.92), 2px 0 40px rgba(0,0,0,.92), 2px 2px 40px rgba(0,0,0,.92),
 }
-/* Dedicated blur+tint layer for WebKit reliability */
-#what .what-overlay p::before{
-  content: "";
-  position: absolute; inset: 0;
-  z-index: -1; /* sit below text, above carousel */
-  background: rgba(0,0,0,.58);
-  -webkit-backdrop-filter: blur(10px) saturate(1.06);
-  backdrop-filter: blur(10px) saturate(1.06);
-  border-radius: inherit;
-  pointer-events: none;
-}
+/* Remove blurred/tinted background layer */
+#what .what-overlay p::before{ content: none; }
 /* Desktop: make overlay box and text larger */
 @media (min-width: 900px){
   #what .what-hero{ min-height: clamp(520px, 66vh, 820px); }
   #what .what-overlay .stack{ gap: 24px; }
   #what .what-overlay p{
     max-width: 1024px; /* slightly wider desktop width */
-    /* restore original vertical padding */
-    padding: clamp(28px, 3.2vw, 44px) clamp(14px, 2.4vw, 24px);
+    padding: 0; /* keep text-only look on desktop */
     font-size: clamp(20px, 1.4vw, 28px);
     line-height: 1.9;
-    /* Stronger glass effect handled by the pseudo-layer */
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.9),
+      0 3px 18px rgba(0,0,0,.9),
+      0 0 2px rgba(0,0,0,.9);
   }
-  #what .what-overlay p::before{
-    background: rgba(0,0,0,.5);
-    -webkit-backdrop-filter: blur(16px) saturate(1.08);
-    backdrop-filter: blur(16px) saturate(1.08);
-  }
+
+  #what .what-overlay p::before{ content: none; }
 }
 /* Centered text on mobile too */
 @media (max-width: 900px){ #what .what-overlay p{ text-align: center; } }

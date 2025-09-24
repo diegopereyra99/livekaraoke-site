@@ -65,36 +65,17 @@
         <h2 id="what-title" class="h2 neon-text">The Karaoke You Love.<br>Reinvented for the Stage.</h2>
 
         <div class="what-hero">
-          <div class="carousel" id="what-carousel" aria-label="What it is photos">
-            <div class="track" role="region" aria-roledescription="carousel" aria-label="Photo carousel">
-              <figure class="slide"><img
-                src="assets/photos/what/ADC_129-1200.webp"
-                srcset="assets/photos/what/ADC_129-800.webp 800w, assets/photos/what/ADC_129-1200.webp 1200w, assets/photos/what/ADC_129-1600.webp 1600w"
-                sizes="100vw"
-                alt="" loading="lazy" decoding="async"></figure>
-              <figure class="slide"><img
-                src="assets/photos/what/ADC_146-1200.webp"
-                srcset="assets/photos/what/ADC_146-800.webp 800w, assets/photos/what/ADC_146-1200.webp 1200w, assets/photos/what/ADC_146-1600.webp 1600w"
-                sizes="100vw"
-                alt="" loading="lazy" decoding="async"></figure>
-              <figure class="slide"><img
-                src="assets/photos/what/ADC_152-1200.webp"
-                srcset="assets/photos/what/ADC_152-800.webp 800w, assets/photos/what/ADC_152-1200.webp 1200w, assets/photos/what/ADC_152-1600.webp 1600w"
-                sizes="100vw"
-                alt="" loading="lazy" decoding="async"></figure>
-              <figure class="slide"><img
-                src="assets/photos/what/ADC_1506-1200.webp"
-                srcset="assets/photos/what/ADC_1506-800.webp 800w, assets/photos/what/ADC_1506-1200.webp 1200w, assets/photos/what/ADC_1506-1600.webp 1600w"
-                sizes="100vw"
-                alt="" loading="lazy" decoding="async"></figure>
-              <figure class="slide"><img
-                src="assets/photos/what/ADC_201-1200.webp"
-                srcset="assets/photos/what/ADC_201-800.webp 800w, assets/photos/what/ADC_201-1200.webp 1200w, assets/photos/what/ADC_201-1600.webp 1600w"
-                sizes="100vw"
-                alt="" loading="lazy" decoding="async"></figure>
-            </div>
-            <!-- dots removed intentionally -->
-          </div>
+          <video class="bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"
+                 poster="assets/photos/what/ADC_129-1200.webp">
+            <!-- WebM VP9 sources by viewport width -->
+            <source src="assets/videos/what/what-loop-1600.webm" type="video/webm" media="(min-width: 1400px)">
+            <source src="assets/videos/what/what-loop-1200.webm" type="video/webm" media="(min-width: 900px)">
+            <source src="assets/videos/what/what-loop-800.webm"  type="video/webm">
+            <!-- MP4 H.264 fallbacks for Safari/iOS -->
+            <source src="assets/videos/what/what-loop-1600.mp4" type="video/mp4" media="(min-width: 1400px)">
+            <source src="assets/videos/what/what-loop-1200.mp4" type="video/mp4" media="(min-width: 900px)">
+            <source src="assets/videos/what/what-loop-800.mp4"  type="video/mp4">
+          </video>
 
           <div class="what-overlay reveal">
             <div class="stack">
@@ -244,7 +225,7 @@
     </div>
   </footer>
 
-  <script defer src="assets/js/what-carousel.js"></script>
+  <!-- Background video replaces the old carousel; no carousel script needed -->
   <!-- Tiny JS: intersection observer for reveals + current year -->
   <script>
     // Year
